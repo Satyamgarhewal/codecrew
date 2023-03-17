@@ -1,0 +1,60 @@
+service: codecrew
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+plugins:
+  - serverless-s3-sync
+
+custom:
+  bucketName: codecrew-serverless-dev
+  s3Sync:
+    - bucketName: ${self:custom.bucketName}
+      localDir: client/dist/
+
+resources:
+  Resources:
+    CodeCrewServerlessBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+    Distribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Origins:
+            - DomainName: ${self:custom.bucketName}.s3.amazonaws.com
+              Id: ReactApp
+              CustomOriginConfig:
+                OriginProtocolPolicy: https-only
+                HTTPPort: 80
+                HTTPSPort: 443
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - DELETE
+              - GET
+              - HEAD
+              - OPTIONS
+              - PATCH
+              - POST
+              - PUT
+            TargetOriginId: ReactApp
+            ViewerProtocolPolicy: redirect-to-https
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+          Enabled: true
+          DefaultRootObject: index.html
+          CustomErrorResponses:
+            - ErrorCode: 404
+              ResponseCode: 200
+              ResponsePagePath: /index.html
+          ViewerCertificate:
+            CloudFrontDefaultCertificate: true
