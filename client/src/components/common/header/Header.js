@@ -5,7 +5,7 @@ import "../header/Header.scss";
 
 
 
-const Header = () => {
+const Header = (props) => {
     return (
         <>
         <Container md>
