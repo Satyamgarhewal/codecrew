@@ -1,41 +1,52 @@
-$head-bg:#EDF6F9;
+$head-bg: #edf6f9;
 
-.header-main{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    width:100%;
-    background: $head-bg;
-    padding: 10px 10px;
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  background: $head-bg;
+  padding: 10px 10px;
 }
-.header-menu ul {
-    display: flex;
-    justify-content: space-around;
-    align-items:center;
-    text-align:center;
-    margin: 0px;
-    padding: 0px;
-    list-style: none;
+.header-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  margin: 0rem;
+  padding: 0rem;
+  list-style: none;
 }
-.header-menu ul li{
-    padding: 10px 20PX;
-    background: #FFF9F9;
-    margin-right: 10px;
+.header-main .logo-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #000;
 }
-.header-menu ul li a{
-    color: black;
-    font-size: 14px;
-    font-weight: 600;
- 
-    border-radius: 5px;   
+.header-menu a {
+  color: #000;
+  font-size: large;
 }
-.header-menu ul li:hover{
-    background: #bf8888;
-    color: blue;
-    border-radius: 5px;
+.header-menu .header-item {
+  padding: 1rem;
+  color: black !important;
+  font-weight: 500;
 }
-.head-logo{
-    width: 75px;
-    height: 75px;
+
+.header-menu a:hover {
+  color: #f07167;
+  cursor: pointer;
+}
+
+.header-menu .header-item .active {
+  color: #f07167;
+}
+.header-menu ul li:hover {
+  background: #bf8888;
+  color: blue;
+  border-radius: 5px;
+}
+.head-logo {
+  width: 75px;
+  height: 75px;
 }
